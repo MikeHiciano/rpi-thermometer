@@ -1,5 +1,5 @@
 import Adafruit_DHT
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, url_for
 
 sensor = Adafruit_DHT.DHT11
 gpio = 17
