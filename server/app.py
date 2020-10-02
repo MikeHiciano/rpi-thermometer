@@ -14,7 +14,7 @@ def index():
 
 @app.route('/thermometer')
 def thermometer():
-    humidity, temperature = Adafruit_DHT.read_entry(sensor,gpio)
+    humidity, temperature = Adafruit_DHT.read_retry(sensor,gpio)
     data = {"humidity":humidity,"temperature":temperature}
     return jsonify({"data": data})
     
