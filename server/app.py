@@ -15,10 +15,6 @@ def index():
 @app.route('/thermometer')
 def thermometer():
     humidity, temperature = Adafruit_DHT.read_entry(sensor,gpio)
-    if humidity is not None and temperature is not None:
-        json = {"humidity": humidity,"temperature": temperature}
-        Return jsonify(json)
+    Return jsonify({"humidity":humidity,"temperature":temperature})
     
-    else:
-        json = {"humidity": 0, "temperature": 0}
-        Return jsonify(json)
+
