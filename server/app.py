@@ -1,5 +1,8 @@
 import Adafruit_DHT
 from flask import Flask, render_template, jsonify, request, url_for
+import requests
+import threading 
+import time
 
 sensor = Adafruit_DHT.DHT11
 gpio = 17
@@ -17,6 +20,19 @@ def thermometer():
     humidity, temperature = Adafruit_DHT.read_retry(sensor,gpio)
     data = {"humidity":humidity,"temperature":temperature}
     return jsonify({"data": data})
-    
+
+def thermometer_db():
+    humidity, temperature = Adafruit_DHT.read_retry(sensor,gpio)
+    measures = {"temperature":temperature,"humidity":humidity}
+    r = requests.post("10.0.0.14:5000/device", json=measures)    
+    time.sleep(30)
+
+def app_run():
+    app.run(debug=True,host="0.0.0.0")
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    
+    thermo = threading.Thread(target=thermometer_db)
+    server = threading.Thread(target=app_run)
+    server.start()
+    thermo.start()
