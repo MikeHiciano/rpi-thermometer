@@ -27,9 +27,6 @@ def thermometer_db():
     r = requests.post("http://10.0.0.14:5000/device", json=measures)    
     time.sleep(30)
 
-def app_run():
-    
-
 if __name__ == "__main__":
     
     thermo = threading.Thread(target=thermometer_db)
