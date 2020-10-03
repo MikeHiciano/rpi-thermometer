@@ -23,7 +23,7 @@ def thermometer():
 
 def thermometer_db():
     humidity, temperature = Adafruit_DHT.read_retry(sensor,gpio)
-    measures = {"temperature":temperature,"humidity":humidity}
+    measures = {"device":"bedroom","temperature":temperature,"humidity":humidity}
     r = requests.post("10.0.0.14:5000/device", json=measures)    
     time.sleep(30)
 
