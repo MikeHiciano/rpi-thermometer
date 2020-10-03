@@ -28,11 +28,10 @@ def thermometer_db():
     time.sleep(30)
 
 def app_run():
-    app.run(debug=True,host="0.0.0.0")
+    
 
 if __name__ == "__main__":
     
     thermo = threading.Thread(target=thermometer_db)
-    server = threading.Thread(target=app_run)
-    server.start()
     thermo.start()
+    app.run(debug=True,host="0.0.0.0")
